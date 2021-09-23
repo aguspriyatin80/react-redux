@@ -50,12 +50,72 @@ import {useSelector} from 'react-redux'
 # add this code before return method
 const name = useSelector(state => state.user.name)
 # locate {name} into section you want
+# add this code in useSlice.js
+remove: (state) => (state = {}),
+addHello: (state, action) => {
+            state.name = "Hello " + action.payload.name;
+        }
 # use dispatch in Update.js when you will update 
 const dispatch = useDispatch()
 const handleUpdate = (e)=>{
     e.preventDefault()
-    dispatch(update({name, email}))
+    dispatch(update({name, email})) //
+    dispatch(addHello({name, email}))
 }
+const handleDelete = (e)=>{
+    e.preventDefault()
+    dispatch(remove())
+}
+# dont forget to export remove and addHello in userSlice.js
 # add function onClik={handleUpdate} in button update
- 
+
+# create miniapi, server.js sbb:
+
+const express = require('express)
+const app = express()
+const cors = require('cors)
+
+app.use(cors())
+app.use(express.json())
+
+app.post('/api/users/:id/update', (req,res)=> {
+    setTimeout(()=>{
+        res.send(req.body)
+    },[2000])
+})
+
+# edit file userSlice.js 
+# add this code in initialState
+pending: false,
+error: false
+# add this code in reducers
+updateStart: (state) => {
+            state.pending = true
+        },
+        updateSuccess: (state, action) => {
+            state.pending = false
+            state.userInfo = action.payload
+        },
+        updateError: (state) => {
+            state.error = true
+            state.pending = false
+        },
+# don't forget to export updateStart, updateSuccess, updateError
+# install axios
+npm install axios 
+# create  apiCalls.js in folder redux
+import axios from 'axios'
+import { updateStart, updateSuccess, updateError } from './userSlice'
+
+export const updateUser = async (user, dispatch) => {
+    dispatch(updateStart())
+    try {
+        const res = await axios.post('http://localhost:8800/api/users/123/update', user)
+        dispatch(updateSuccess(res.data))
+    } catch (err) {
+        dispatch(updateError())
+    }
+}
+
+
 

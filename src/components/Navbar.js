@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 export default function Navbar() {
-    const name = useSelector(state => state.user.name)
+    const name = useSelector(state => state.user.userInfo.name)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">

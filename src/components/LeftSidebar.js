@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 export default function LeftSidebar() {
-    const name = useSelector(state => state.user.name)
+    const name = useSelector(state => state.user.userInfo.name)
     return (
         <nav>
             {name}

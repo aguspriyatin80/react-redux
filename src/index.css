@@ -35,3 +35,17 @@ footer {
   background: lightcoral;
   height: 22vh;
 }
+
+button:disabled {
+  cursor: not-allowed;
+  /* background-color: rgb(147, 185, 185); */
+}
+
+p.error {
+  color: red;
+  font-size: 14px;
+}
+p.success {
+  color: green;
+  font-size: 14px;
+}
