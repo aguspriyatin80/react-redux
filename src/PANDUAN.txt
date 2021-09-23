@@ -1,0 +1,61 @@
+# install bootstrap
+npm install bootstrap popper.js @popperjs/core
+# install redux toolkit and redux
+npm install @reduxjs/toolkit
+# install redux
+npm install redux 
+# create redux folder
+# create userSlice.js in folder redux
+# create folder components
+# create file Update.js in folder components 
+import React, { useState } from 'react'
+
+export default function Update() {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    console.log(name, email)
+
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        alert(`${name} ${email}`)
+    }
+    return (
+        <form>
+            <h2>Update User</h2>
+            <hr />
+            <div className="mb-3">
+                <label htmlFor="username" className="form-label">Username</label>
+                <input onChange={(e) => setName(e.target.value)} type="text" className="form-control" id="username" placeholder="username" />
+            </div>
+
+            <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email address</label>
+                <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="email" placeholder="name@mail.com" />
+            </div>
+            <button onClick={handleUpdate} className="btn btn-primary">Update</button>
+        </form>
+    )
+}
+
+# create store.js in folder redux
+# instal react-redux 
+npm instal react-redux
+# import store in index.js
+import store from './redux/store'
+# import Provider from react-redux in index.js
+import {Provider} from 'react-redux'
+# add <Provider store={store}></Provider> between <App/>
+# import useSelector in all components that need it
+import {useSelector} from 'react-redux'
+# add this code before return method
+const name = useSelector(state => state.user.name)
+# locate {name} into section you want
+# use dispatch in Update.js when you will update 
+const dispatch = useDispatch()
+const handleUpdate = (e)=>{
+    e.preventDefault()
+    dispatch(update({name, email}))
+}
+# add function onClik={handleUpdate} in button update
+ 
+
