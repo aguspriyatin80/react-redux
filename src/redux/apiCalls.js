@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { updateStart, updateSuccess, updateFailure } from './userSlice'
 
-export const updateUser = async (user, dispatch) => {
+const updateUser = async (user, dispatch) => {
     dispatch(updateStart())
     try {
         const res = await axios.post('http://localhost:8800/api/users/123/update', user)
@@ -10,3 +10,14 @@ export const updateUser = async (user, dispatch) => {
         dispatch(updateFailure())
     }
 }
+
+const listUser = async () => {
+    try {
+        const response = await axios.get('http://localhost:8800/api/users');
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export { updateUser, listUser }

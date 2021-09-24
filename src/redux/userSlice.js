@@ -34,7 +34,6 @@ export const userSlice = createSlice({
         updateFailure: (state) => {
             state.pending = false
             state.error = true
-
         },
     }
 })
